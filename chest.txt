@@ -1,0 +1,3 @@
+barbellbench 200
+shoulderpress 200
+curls 200
