@@ -1,3 +1,6 @@
 barbellbench 200
 shoulderpress 200
 curls 200
+burpees 200
+pushups 200
+flexers 200
