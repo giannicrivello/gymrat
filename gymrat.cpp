@@ -1,7 +1,5 @@
 #include<iostream>
 #include<map>
-#include<vector>
-#include<tuple>
 #include<string>
 #include<fstream>
 #include<sstream>
@@ -24,6 +22,8 @@ class workout {
 		std::string _idxfilename;
 	public:
 		workout(std::string filename, std::string idxname){
+			std::ofstream workout_file("workout.txt");
+			workout_file << " ";
 			_filename = filename;
 			std::string line;
 			std::deque<std::string> queue;
@@ -60,14 +60,15 @@ class workout {
 			file << std::to_string(idx + 1);
 		}
 	void dump_all_workouts();
-	std::vector<std::string> load(int load_num);
+	void load(int load_num);
 };
-std::vector<std::string> workout::load(int load_num){
-	std::vector<std::string> vec;
+void workout::load(int load_num){
 	//check if idx is out of bounds
 	//load in range load_num
 	//increment idx
 	int n=0;
+	std::ofstream file;
+	file.open("workout.txt", std::ios::app);
 	std::map<std::string, std::string>::iterator it = map.begin();
 	//increment our pointer to last saved idx
 	for(int i=0; i < idx; i++) {
@@ -76,13 +77,17 @@ std::vector<std::string> workout::load(int load_num){
 	}
 	while(n < load_num){
 		if(it == map.end()) it=map.begin();
-		vec.push_back(it->second);
+		file << "====== Workout: " << it->first << " =========\n" 
+			<< "Spread =====> \n" 
+			<< "60% of max (13-15 reps): " << stof(it->second)*0.60 << "lbs\n" 
+			<< "80% of max (8-10 reps): " << stof(it->second)*0.80 << "lbs\n" 
+			<< "90% of max (1-5 reps): " << stof(it->second)*0.90 << "lbs\n" 
+			<< "Current Max: " << stof(it->second) << "lbs\n" 
+			<< std::endl;
 		it++;
 		n++;
-
 	}
-	return vec;
-
+	file.close();
 }
 void workout::dump_all_workouts(){
 	for(std::map<std::string, std::string>::iterator it=map.begin(); it != map.end(); it++){
@@ -92,41 +97,10 @@ void workout::dump_all_workouts(){
 int main(){
 	//keeping track of idx and workout file
 	workout chest("chest.txt", "chestidx.txt");
-	chest.dump_all_workouts();
-	std::vector<std::string> vec = chest.load(3);
-	for(std::vector<std::string>::iterator it=vec.begin(); it != vec.end(); it++){
-		std::cout << *it << std::endl;
-	}
+	workout back("back.txt", "backidx.txt");
+	workout legs("legs.txt", "legsidx.txt");
+	chest.load(3);
+	back.load(3);
+	legs.load(3);
+	std::cout<<"**** Successfully generated workout \u2620 ****";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,3 @@
+squats 500
+legpress 300
+lunges 200
