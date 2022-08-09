@@ -1,0 +1,22 @@
+{
+  "name": "gymrat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giannicrivello/gymrat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giannicrivello/gymrat/issues"
+  },
+  "homepage": "https://github.com/giannicrivello/gymrat#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
